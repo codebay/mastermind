@@ -1,21 +1,20 @@
-# Mastermind
+# Mastermind Kata
 
-**TODO: Add description**
+This game where one player, the "code maker", has to choose a secret combination of colored pegs and then make it guess to someone else, the "code breaker". The code maker is answering to each guess attempt of the codebreaker by indicating only the number of well placed colors and the number of correct but misplaced colors.
 
-## Installation
+If you remember playing the game, being the one who guesses is very brain demanding, whereas the other player get bored rapidly.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `mastermind` to your list of dependencies in `mix.exs`:
+## Problem Description
 
-```elixir
-def deps do
-  [
-    {:mastermind, "~> 0.1.0"}
-  ]
-end
-```
+The idea of this Kata is to code an algorithm capable of playing this boring role: answering the number of well placed and misplaced colors.
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/mastermind](https://hexdocs.pm/mastermind).
+Therefore, your function should return, for a secret and a guessing combination:
 
+- the number of well placed colors
+- the number of correct but misplaced colors
+
+A combination can contain any number of pegs but you’d better give the same number for the secret and the guessing. You can use any number of colors.
+
+## Knuth's Algorithm
+
+Code breaking algorithm is described well here https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm
