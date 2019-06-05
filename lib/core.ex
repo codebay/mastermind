@@ -3,12 +3,12 @@ defmodule Mastermind.Core do
 
   def score(code, guess) do
     %{
-      red: position_and_colour_match(code, guess),
-      white: colour_match_only(code, guess)
+      red: well_placed_colours(code, guess),
+      white: misplaced_colours(code, guess)
     }
   end
 
-  defp position_and_colour_match(code, guess) do
+  defp well_placed_colours(code, guess) do
     guess
     |> Enum.zip(code)
     |> Enum.count(&same?/1)
@@ -16,11 +16,11 @@ defmodule Mastermind.Core do
 
   defp same?({x,y}), do: x == y
 
-  defp colour_match_only(code, guess) do
-     correct_colours(code, guess) - position_and_colour_match(code, guess)
+  defp misplaced_colours(code, guess) do
+     matching_colours(code, guess) - well_placed_colours(code, guess)
   end
 
-  defp correct_colours(code, guess) do
+  defp matching_colours(code, guess) do
     @number_of_pins - Enum.count(code -- guess)
   end
 end
