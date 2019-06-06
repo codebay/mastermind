@@ -18,15 +18,15 @@ break the code in five or less guesses.
 If you run the code in the elixir repl (iex)
 
 ```
-iex> Mastermind.Game.new([:red, :red, :blue, :blue]) |> Mastermind.Strategy.knuths_algorithm
+iex> Mastermind.Game.new([:red, :red, :blue, :blue]) |> Mastermind.Strategy.break_code
 {:won,
  %Mastermind.Game{
    code: [:red, :red, :blue, :blue],
    guesses: [
      {[:red, :red, :blue, :blue], %{red: 4, white: 0}},
-     {[:yellow, :yellow, :black, :yellow], %{red: 0, white: 0}},
-     {[:orange, :green, :green, :orange], %{red: 0, white: 0}},
-     {[:black, :black, :orange, :red], %{red: 0, white: 1}}
+     {[:red, :orange, :blue, :red], %{red: 2, white: 1}},
+     {[:red, :blue, :red, :black], %{red: 1, white: 2}},
+     {[:red, :red, :green, :green], %{red: 2, white: 0}}
    ]
  }}
 ```
