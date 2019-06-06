@@ -1,14 +1,32 @@
 defmodule MastermindStrategyTest do
   use ExUnit.Case
 
+  alias Mastermind.Game
   alias Mastermind.Strategy
 
-  test "all combinations" do
-    assert List.first(Strategy.combinations()) == [:red,:red,:red,:red]
-    assert Enum.count(Strategy.combinations()) == 1296
+  test "new game solve in one guesses" do
+    Game.new([:red, :red, :green, :green])
+    |> Strategy.break_code()
+    |> assert_won(1)
   end
 
-  test "guess matches" do
-    assert Strategy.guess_matches([[:red,:red,:red,:red], [:red,:red,:red,:green]], [:red,:red,:red,:red], %{ red: 4, white: 0} ) == [[:red,:red,:red,:red]]
+  test "new game solve in four guesses" do
+    Game.new([:red, :green, :black, :blue])
+    |> Strategy.break_code()
+    |> assert_won(5)
+  end
+
+  test "solve partially played game" do
+    Game.new([:red, :green, :black, :blue])
+    |> Game.guess([:black, :yellow, :orange, :blue])
+    |> Game.guess([:blue, :yellow, :orange, :black])
+    |> Game.guess([:green, :yellow, :black, :blue])
+    |> Strategy.break_code()
+    |> assert_won(5)
+  end
+
+  def assert_won({outcome, game}, moves) do
+    assert outcome == :won
+    assert Game.moves?(game) == moves
   end
 end

@@ -20,13 +20,21 @@ defmodule Mastermind.Game do
     }
   end
 
-  def current_guess?(game) do
-    {guess, _} = List.first(game.guesses)
+  def current_guess?(%{guesses: []}) do
+    []
+  end
+
+  def current_guess?(%{guesses: guesses}) do
+    {guess, _} = List.first(guesses)
     guess
   end
 
-  def score?(game) do
-    {_, score} = List.first(game.guesses)
+  def score?(%{guesses: []}) do
+    %{red: 0, white: 0}
+  end
+
+  def score?(%{guesses: guesses}) do
+    {_, score} = List.first(guesses)
     score
   end
 
